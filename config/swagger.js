@@ -23,7 +23,7 @@ const options = {
         },
       },
       {
-        url: 'https://your-api-url.run.app/api/{version}',
+        url: 'https://text-extraction-api-162626234940.asia-south1.run.app/api/{version}',
         description: 'Production server',
         variables: {
           version: {
