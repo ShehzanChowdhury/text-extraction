@@ -5,7 +5,7 @@ const options = {
     openapi: '3.0.0',
     info: {
       title: 'OCR API',
-      version: '1.0.0',
+      version: process.env.API_VERSION || 'v1',
       description: 'Serverless OCR API using Google Cloud Run and Vision API.',
       contact: {
         name: 'API Support',
@@ -13,12 +13,24 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:8080',
+        url: 'http://localhost:8080/api/{version}',
         description: 'Development server',
+        variables: {
+          version: {
+            default: process.env.API_VERSION || 'v1',
+            description: 'API version',
+          },
+        },
       },
       {
-        url: 'https://your-api-url.run.app',
+        url: 'https://your-api-url.run.app/api/{version}',
         description: 'Production server',
+        variables: {
+          version: {
+            default: process.env.API_VERSION || 'v1',
+            description: 'API version',
+          },
+        },
       },
     ],
     tags: [
