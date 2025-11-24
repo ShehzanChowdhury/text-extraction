@@ -24,8 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', (req, res) => {
   const spec = JSON.parse(JSON.stringify(swaggerSpec));
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : req.protocol;
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${req.get('host')}/api/${API_VERSION}`;
+  
   spec.servers = [
     {
       url: baseUrl,
