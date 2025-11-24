@@ -11,28 +11,6 @@ const options = {
         name: 'API Support',
       },
     },
-    servers: [
-      {
-        url: 'http://localhost:8080/api/{version}',
-        description: 'Development server',
-        variables: {
-          version: {
-            default: process.env.API_VERSION || 'v1',
-            description: 'API version',
-          },
-        },
-      },
-      {
-        url: 'https://text-extraction-api-162626234940.asia-south1.run.app/api/{version}',
-        description: 'Production server',
-        variables: {
-          version: {
-            default: process.env.API_VERSION || 'v1',
-            description: 'API version',
-          },
-        },
-      },
-    ],
     tags: [
       {
         name: 'Health',
@@ -181,6 +159,7 @@ const options = {
       },
       requestBodies: {
         SingleImageUpload: {
+          description: 'Using cURL\n\n- Single image (OCR):\n\n```bash\ncurl -X POST {baseUrl}/ocr -F "image=@test-image.jpg"\n```',
           content: {
             'multipart/form-data': {
               schema: {
@@ -199,6 +178,7 @@ const options = {
           required: true,
         },
         BatchImagesUpload: {
+          description: 'Using cURL\n\n- Batch (multiple images):\n\n```bash\ncurl -X POST {baseUrl}/ocr/batch -F "images=@test-image-1.jpg" -F "images=@test-image-2.jpg"\n```',
           content: {
             'multipart/form-data': {
               schema: {

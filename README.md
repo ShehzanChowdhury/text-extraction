@@ -12,7 +12,7 @@ A serverless API built with Node.js and Express that accepts image uploads and e
 - ✅ File size validation (10MB limit)
 - ✅ Processing time tracking
 - ✅ **API versioning** (`/api/v1/ocr`)
-- ✅ **Swagger/OpenAPI documentation** (`/api-docs`)
+- ✅ **Swagger documentation** (`/api-docs`)
 - ✅ **RESTful design** with proper HTTP methods and status codes
 - ✅ **Request/response validation** with clear error messages
 
@@ -91,11 +91,23 @@ If you need to run deployments manually (outside CI), you can still use `gcloud 
 
 ### Using cURL
 
+- Single image (OCR):
+
 ```bash
 curl -X POST \
   https://your-api-url.run.app/api/v1/ocr \
   -F "image=@test-image.jpg"
 ```
+
+- Batch (multiple images):
+
+```bash
+curl -X POST \
+  https://your-api-url.run.app/api/v1/ocr/batch \
+  -F "images=@test-image-1.jpg" \
+  -F "images=@test-image-2.jpg"
+```
+
 
 ## Cost Considerations
 
