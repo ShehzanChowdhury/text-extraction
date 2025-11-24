@@ -1,11 +1,13 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 
+const API_VERSION = process.env.API_VERSION || 'v1';
+
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
       title: 'OCR API',
-      version: process.env.API_VERSION || 'v1',
+      version: API_VERSION,
       description: 'Serverless OCR API using Google Cloud Run and Vision API.',
       contact: {
         name: 'API Support',
@@ -14,7 +16,7 @@ const options = {
     tags: [
       {
         name: 'Health',
-        description: 'Health check endpoints',
+        description: 'Service health monitoring endpoints',
       },
       {
         name: 'OCR',
@@ -64,6 +66,49 @@ const options = {
             '413': { $ref: '#/components/responses/PayloadTooLarge' },
             '415': { $ref: '#/components/responses/UnsupportedMediaType' },
             '500': { $ref: '#/components/responses/InternalServerError' },
+          },
+        },
+      },
+      '/health': {
+        servers: [
+          {
+            url: '/',
+          },
+        ],
+        get: {
+          summary: 'Health check endpoint',
+          tags: ['Health'],
+          description: 'Returns the health status of the API',
+          responses: {
+            '200': {
+              description: 'Service is healthy',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      status: {
+                        type: 'string',
+                        example: 'ok',
+                      },
+                      service: {
+                        type: 'string',
+                        example: 'OCR API',
+                      },
+                      timestamp: {
+                        type: 'string',
+                        format: 'date-time',
+                        example: '2024-01-01T00:00:00.000Z',
+                      },
+                      version: {
+                        type: 'string',
+                        example: 'v1',
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       },
