@@ -45,6 +45,13 @@ cp .env.example .env
 
 Edit `.env` and configure.
 
+
+### 3. Run Locally:
+
+```bash
+npm start
+```
+
 ## Deployment to Google Cloud Run
 
 This project uses GitHub Actions to build and deploy the service to Cloud Run automatically on pushes to the `main` branch. The workflow performs the build (using Cloud Build) and then deploys the produced image to Cloud Run.
